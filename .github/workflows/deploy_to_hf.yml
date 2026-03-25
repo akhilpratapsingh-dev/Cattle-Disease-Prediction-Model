@@ -16,6 +16,11 @@ jobs:
           fetch-depth: 0
           lfs: true  # Important for large files like .h5 models
 
+      - name: Install Git LFS
+        run: |
+          sudo apt-get install -y git-lfs
+          git lfs install
+
       - name: Push to Hugging Face Space
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
@@ -23,8 +28,20 @@ jobs:
           git config --global user.email "deploy-bot@github.com"
           git config --global user.name "GitHub Deploy Bot"
 
-          # Clone the HF Space
+          # Clone the HF Space (with LFS support)
           git clone https://user:$HF_TOKEN@huggingface.co/spaces/${{ secrets.HF_USERNAME }}/${{ secrets.HF_SPACE_NAME }} hf_space
+          cd hf_space
+
+          # Enable LFS and track large file types
+          git lfs install
+          git lfs track "*.h5"
+          git lfs track "*.pkl"
+          git lfs track "*.pb"
+          git lfs track "variables.data-*"
+          git lfs track "variables.index"
+          git add .gitattributes
+
+          cd ..
 
           # Copy runtime files only — exclude training/dev-only files
           rsync -av \
@@ -39,7 +56,7 @@ jobs:
             --exclude='runtime.txt' \
             ./ hf_space/
 
-          # Push to Hugging Face
+          # Commit and push (LFS handles large files automatically)
           cd hf_space
           git add .
           git diff --cached --quiet || git commit -m "Auto-deploy from GitHub Actions: ${{ github.sha }}"
