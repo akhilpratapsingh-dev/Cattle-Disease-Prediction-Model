@@ -1,4 +1,16 @@
+---
+title: Cattle Disease Detector
+emoji: 🐄
+colorFrom: green
+colorTo: red
+sdk: streamlit
+sdk_version: "1.32.0"
+app_file: app.py
+pinned: false
+---
+
 # 🐄 Cattle Skin Disease Classification using Deep Learning
+
 
 ---
 
