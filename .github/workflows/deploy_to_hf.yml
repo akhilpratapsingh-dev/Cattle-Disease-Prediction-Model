@@ -1,0 +1,46 @@
+name: Deploy to Hugging Face Spaces
+
+on:
+  push:
+    branches:
+      - main   # Triggers on every push to main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout GitHub Repo
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          lfs: true  # Important for large files like .h5 models
+
+      - name: Push to Hugging Face Space
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git config --global user.email "deploy-bot@github.com"
+          git config --global user.name "GitHub Deploy Bot"
+
+          # Clone the HF Space
+          git clone https://user:$HF_TOKEN@huggingface.co/spaces/${{ secrets.HF_USERNAME }}/${{ secrets.HF_SPACE_NAME }} hf_space
+
+          # Copy runtime files only — exclude training/dev-only files
+          rsync -av \
+            --exclude='.git' \
+            --exclude='env/' \
+            --exclude='venv/' \
+            --exclude='__pycache__/' \
+            --exclude='*.pyc' \
+            --exclude='dataset.csv' \
+            --exclude='final_confusion_matrix.png' \
+            --exclude='predict.py' \
+            --exclude='runtime.txt' \
+            ./ hf_space/
+
+          # Push to Hugging Face
+          cd hf_space
+          git add .
+          git diff --cached --quiet || git commit -m "Auto-deploy from GitHub Actions: ${{ github.sha }}"
+          git push
