@@ -4,9 +4,10 @@ emoji: 🐄
 colorFrom: green
 colorTo: red
 sdk: streamlit
-sdk_version: "1.32.0"
+sdk_version: "1.41.0"
 app_file: app.py
 pinned: false
+URL: https://akhil2005-ai.hf.space
 ---
 
 # 🐄 Cattle Skin Disease Classification using Deep Learning
