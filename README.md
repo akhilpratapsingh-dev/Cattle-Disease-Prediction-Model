@@ -35,6 +35,9 @@ The system supports **automatic preprocessing**, **augmentation**, **class balan
 - ResNet50
 - NASNetMobile
 - Custom CNN
+- IMAGES
+- <img width="1080" height="890" alt="Screenshot 2026-03-26 202342" src="https://github.com/user-attachments/assets/10cbc1a1-9997-4204-99bc-812c26b61923" />
+
 
 ⚖️ **Handles class imbalance** using class weights  
 🛠️ **Training callbacks included:**
