@@ -104,6 +104,15 @@ Cattle-Disease-Prediction-Model/
 ## 🌐 Live Demo (Streamlit App)
 
 You can try the deployed version of this model through an interactive **Streamlit web application**.
+*Live App:*  
+👉 https://akhiil1-cattle-disease-model.hf.space
+### 🔍 What the App Does
+- Upload a cattle skin image 📸  
+- Automatically preprocess the image  
+- Predict the *skin disease class* using the trained deep learning model  
+- Display the predicted label in real time  
+
+This deployment demonstrates how the trained model can be used for *real-world inference* through a simple and user-friendly interface.
 
 ## 🎯 Future Enhancements
 
