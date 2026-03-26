@@ -37,6 +37,8 @@ The system supports **automatic preprocessing**, **augmentation**, **class balan
 - Custom CNN
 - IMAGES
 - <img width="1080" height="890" alt="Screenshot 2026-03-26 202342" src="https://github.com/user-attachments/assets/10cbc1a1-9997-4204-99bc-812c26b61923" />
+<img width="1858" height="969" alt="Screenshot 2026-03-25 221959" src="https://github.com/user-attachments/assets/1235aa60-c628-4192-9f90-88cab59f67c0" />
+
 
 
 ⚖️ **Handles class imbalance** using class weights  
